@@ -27,15 +27,3 @@ spec:
               value: "0"
             - name: DATABASE_URL
               value: "postgresql://bookstore:bookstore_pass@77.42.19.116:5431/bookstore"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: bookstore
-spec:
-  selector:
-    app: bookstore
-  ports:
-    - port: 5000
-      targetPort: 5000
-  type: ClusterIP
