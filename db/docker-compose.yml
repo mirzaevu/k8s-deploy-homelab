@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: bookstore_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bookstore
+      POSTGRES_USER: bookstore
+      POSTGRES_PASSWORD: bookstore_pass
+    ports:
+      - "5431:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:7
+    container_name: homelab_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bookstore_mongo
+      MONGO_INITDB_ROOT_PASSWORD: bookstore_mongo_pass
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  pg_data:
+  mongo_data:
