@@ -25,15 +25,3 @@ spec:
               value: "http://bookstore:5000"
             - name: MONGO_URL
               value: "mongodb://bookstore_mongo:bookstore_mongo_pass@77.42.19.116:27018/?authSource=admin"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: order-service
-spec:
-  selector:
-    app: order-service
-  ports:
-    - port: 8001
-      targetPort: 8001
-  type: ClusterIP
