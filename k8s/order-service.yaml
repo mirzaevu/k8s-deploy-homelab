@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: mirzaevu/bookstore-order-svc:v1
+          image: mirzaevu/bookstore-order-svc:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8001
