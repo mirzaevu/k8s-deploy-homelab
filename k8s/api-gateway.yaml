@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookstore-api-gateway
-          image: mirzaevu/bookstore-api-gateway:v1
+          image: mirzaevu/bookstore-api-gateway:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
