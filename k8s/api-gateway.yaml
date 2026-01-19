@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: bookstore-api-gateway
+          image: mirzaevu/bookstore-api-gateway:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: BOOKSTORE_SERVICE_URL
+              value: "http://bookstore:5000"
+            - name: ORDER_SERVICE_URL
+              value: "http://order-service:8001"
+            - name: JWT_SECRET
+              value: "secret-key"
+            - name: TOKEN_EXPIRY
+              value: "24h"
+            - name: ALLOWED_ORIGINS
+              value: "*"
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
