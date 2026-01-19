@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookstore
-          image: mirzaevu/bookstore-flask:v1
+          image: mirzaevu/bookstore:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
