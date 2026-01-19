@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: mirzaevu/bookstore-order-svc:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8001
+          env:
+            - name: BOOK_SERVICE_URL
+              value: "http://bookstore:5000"
+            - name: MONGO_URL
+              value: "mongodb://bookstore_mongo:bookstore_mongo_pass@77.42.19.116:27018/?authSource=admin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-service
+  ports:
+    - port: 8001
+      targetPort: 8001
+  type: ClusterIP
